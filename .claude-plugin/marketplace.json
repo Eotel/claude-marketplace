@@ -1,0 +1,24 @@
+{
+  "name": "claude-marketplace",
+  "owner": {
+    "name": "Eotel",
+    "url": "https://github.com/Eotel"
+  },
+  "plugins": [
+    {
+      "name": "codex-toolkit",
+      "description": "Commands and skills for a safe Codex CLI workflow.",
+      "source": "./plugins/codex-toolkit",
+      "version": "0.1.0",
+      "author": {
+        "name": "Eotel",
+        "url": "https://github.com/Eotel"
+      },
+      "keywords": [
+        "codex",
+        "workflow",
+        "cli"
+      ]
+    }
+  ]
+}

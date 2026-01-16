@@ -1,0 +1,16 @@
+{
+  "name": "codex-toolkit",
+  "version": "0.1.0",
+  "description": "Commands and skills for a safe Codex CLI workflow.",
+  "author": {
+    "name": "Eotel",
+    "url": "https://github.com/Eotel"
+  },
+  "repository": "https://github.com/Eotel/claude-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "workflow",
+    "cli"
+  ]
+}
