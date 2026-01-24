@@ -14,11 +14,16 @@
         "name": "Eotel",
         "url": "https://github.com/Eotel"
       },
-      "keywords": [
-        "codex",
-        "workflow",
-        "cli"
-      ]
+      "keywords": ["codex", "workflow", "cli"]
+    },
+    {
+      "name": "base",
+      "description": "Base general plugin.",
+      "source": "./plugins/base",
+      "version": "0.1.0",
+      "author": {
+        "name": "Eotel"
+      }
     }
   ]
 }
