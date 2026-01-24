@@ -1,7 +1,7 @@
 {
   "name": "codex-toolkit",
-  "version": "0.1.0",
-  "description": "Commands and skills for a safe Codex CLI workflow.",
+  "version": "0.4.0",
+  "description": "External code review using Codex CLI as a parallel reviewer.",
   "author": {
     "name": "Eotel",
     "url": "https://github.com/Eotel"
@@ -10,7 +10,8 @@
   "license": "MIT",
   "keywords": [
     "codex",
-    "workflow",
-    "cli"
+    "review",
+    "cli",
+    "openai"
   ]
 }
