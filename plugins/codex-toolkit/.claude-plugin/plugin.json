@@ -8,10 +8,5 @@
   },
   "repository": "https://github.com/Eotel/claude-marketplace",
   "license": "MIT",
-  "keywords": [
-    "codex",
-    "review",
-    "cli",
-    "openai"
-  ]
+  "keywords": ["codex", "review", "cli", "openai"]
 }

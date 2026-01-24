@@ -5,6 +5,7 @@ External code review using Codex CLI as a parallel reviewer for Claude Code impl
 ## Purpose
 
 Use a different LLM (Codex/OpenAI) to review code that Claude implemented. This provides:
+
 - Independent perspective from a different model
 - Parallel review across multiple concerns (bugs, security, edge-cases)
 - High-quality analysis with Codex's reasoning capabilities
@@ -39,13 +40,14 @@ cp -r plugins/codex-toolkit ~/.claude/plugins/
 
 Run parallel code reviews using 3 perspectives:
 
-| Perspective | Focus |
-|-------------|-------|
-| bugs | Logic errors, off-by-one, null handling, race conditions |
-| security | Injection, auth flaws, data exposure |
-| edge-cases | Error handling, boundaries, timeouts |
+| Perspective | Focus                                                    |
+| ----------- | -------------------------------------------------------- |
+| bugs        | Logic errors, off-by-one, null handling, race conditions |
+| security    | Injection, auth flaws, data exposure                     |
+| edge-cases  | Error handling, boundaries, timeouts                     |
 
 **Usage:**
+
 ```bash
 /codex-toolkit:codex-review              # Review current directory
 /codex-toolkit:codex-review src/auth.ts  # Review specific file
