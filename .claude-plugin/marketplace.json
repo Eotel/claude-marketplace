@@ -1,5 +1,8 @@
 {
   "name": "eotel-marketplace",
+  "metadata": {
+    "description": "A collection of Claude Code plugins for development workflows and tooling."
+  },
   "owner": {
     "name": "Eotel",
     "url": "https://github.com/Eotel"
