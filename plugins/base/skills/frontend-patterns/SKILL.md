@@ -1,5 +1,4 @@
 ---
-name: frontend-patterns
 description: Frontend development patterns for React, Next.js, state management, performance optimization, and UI best practices.
 ---
 
