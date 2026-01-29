@@ -4,6 +4,9 @@ description: Automatically extract reusable patterns from Claude Code sessions a
 
 # Continuous Learning Skill
 
+> **Note:** This plugin adopts [Homunculus](https://github.com/humanplane/homunculus) for continuous learning.
+> The SessionEnd hook (evaluate-session) is disabled. Use `/learn` command for manual pattern extraction.
+
 Automatically evaluates Claude Code sessions on end to extract reusable patterns that can be saved as learned skills.
 
 ## How It Works
