@@ -40,10 +40,12 @@ codex exec --sandbox read-only --full-auto --reasoning-effort high "Review src/a
 ## Workflow
 
 1. Parse $ARGUMENTS for target path (defaults to current directory)
-2. Launch 3 background tasks with `run_in_background: true`
+2. Launch 3 background tasks with `run_in_background: true` and `timeout: 1200000` (20 minutes)
 3. Wait for all to complete using TaskOutput
 4. Summarize findings from all perspectives
 5. Report actionable issues only
+
+**Important:** Set timeout to 20 minutes (1200000ms) for Codex reviews, as they may take longer than the default timeout due to reasoning-intensive analysis.
 
 ## Output Format
 

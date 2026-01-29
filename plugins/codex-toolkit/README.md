@@ -54,6 +54,8 @@ Run parallel code reviews using 3 perspectives:
 /codex-toolkit:codex-review ./src        # Review directory
 ```
 
+**Note:** When running as background tasks, set `timeout: 1200000` (20 minutes) since Codex reviews may take longer due to reasoning-intensive analysis.
+
 ## Scripts
 
 ### `scripts/review.sh`
