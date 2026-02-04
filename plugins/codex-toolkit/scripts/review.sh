@@ -1,6 +1,6 @@
 #!/bin/bash
 # Codex CLI review wrapper
-# Usage: ./review.sh <perspective> [target]
+# Usage: review.sh <perspective> [target]
 # Perspectives: bugs, security, edge-cases
 
 set -euo pipefail
@@ -12,7 +12,7 @@ if ! command -v codex &> /dev/null; then
 fi
 
 PERSPECTIVE="${1:-bugs}"
-TARGET="${2:-.}"  # Default to current directory
+TARGET="${2:-.}"
 
 case "$PERSPECTIVE" in
   bugs)
@@ -32,9 +32,11 @@ Output format: [file:line] Issue description"
     ;;
   *)
     echo "Unknown perspective: $PERSPECTIVE"
-    echo "Usage: ./review.sh <bugs|security|edge-cases> [target-path]"
+    echo "Usage: review.sh <bugs|security|edge-cases> [target-path]"
     exit 1
     ;;
 esac
 
-codex exec --sandbox read-only --full-auto "$PROMPT"
+# Use read-only sandbox for safe code review (no modifications)
+# exec runs non-interactively, suitable for background tasks
+codex exec --sandbox read-only "$PROMPT"

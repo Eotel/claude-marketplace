@@ -54,7 +54,7 @@ Run parallel code reviews using 3 perspectives:
 /codex-toolkit:codex-review ./src        # Review directory
 ```
 
-**Note:** When running as background tasks, set `timeout: 1200000` (20 minutes) since Codex reviews may take longer due to reasoning-intensive analysis.
+**Note:** Reviews run as background tasks with 20-minute timeout since Codex analysis may take longer due to reasoning.
 
 ## Scripts
 
@@ -63,21 +63,10 @@ Run parallel code reviews using 3 perspectives:
 Wrapper for `codex exec` with predefined review prompts. Codex reads files directly via `--sandbox read-only` mode.
 
 ```bash
+# Manual usage (plugin uses ${CLAUDE_PLUGIN_ROOT}/scripts/review.sh)
 ./scripts/review.sh bugs src/main.ts
 ./scripts/review.sh security ./src
-./scripts/review.sh edge-cases
-```
-
-## Direct Usage
-
-For custom reviews without the wrapper:
-
-```bash
-# Basic review - Codex reads the file directly
-codex exec --sandbox read-only --full-auto "Review src/auth.ts for bugs"
-
-# With high reasoning effort
-codex exec --sandbox read-only --full-auto --reasoning-effort high "Detailed security audit of ./src"
+./scripts/review.sh edge-cases .
 ```
 
 ## Session Hook

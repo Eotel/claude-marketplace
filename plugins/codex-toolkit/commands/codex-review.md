@@ -1,51 +1,36 @@
 ---
 description: Run parallel code reviews using Codex CLI as an external reviewer
 argument-hint: [target-path]
-allowed-tools: Bash(./scripts/review.sh*), Bash(codex exec*)
+allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/review.sh*)
 ---
 
 # Codex Review
 
-You are Claude Code. Use Codex CLI to get an external LLM review of code you implemented.
+You are Claude Code. Use Codex CLI to get an external LLM review of code.
 
 ## Instructions
 
-Run 3 parallel background reviews using different perspectives:
+Run 3 parallel background reviews using the review script with different perspectives.
+
+**IMPORTANT:** Always use the full script path with `${CLAUDE_PLUGIN_ROOT}`:
 
 ```bash
-# Run all 3 in parallel as background tasks
-./scripts/review.sh bugs $TARGET &
-./scripts/review.sh security $TARGET &
-./scripts/review.sh edge-cases $TARGET &
+${CLAUDE_PLUGIN_ROOT}/scripts/review.sh bugs $TARGET
+${CLAUDE_PLUGIN_ROOT}/scripts/review.sh security $TARGET
+${CLAUDE_PLUGIN_ROOT}/scripts/review.sh edge-cases $TARGET
 ```
 
-Where `$TARGET` is a file or directory path (defaults to `.` if empty).
-
-Codex will read the files directly via `--sandbox read-only` mode.
-
-## Alternative: Direct codex exec
-
-For custom review prompts, use codex exec directly:
-
-```bash
-codex exec --sandbox read-only --full-auto "Review src/auth.ts for bugs"
-```
-
-For detailed analysis, add reasoning flag:
-
-```bash
-codex exec --sandbox read-only --full-auto --reasoning-effort high "Review src/auth.ts for security vulnerabilities"
-```
+Where `$TARGET` is a file or directory path from the user's arguments (defaults to `.` if not specified).
 
 ## Workflow
 
-1. Parse $ARGUMENTS for target path (defaults to current directory)
-2. Launch 3 background tasks with `run_in_background: true` and `timeout: 1200000` (20 minutes)
-3. Wait for all to complete using TaskOutput
-4. Summarize findings from all perspectives
-5. Report actionable issues only
-
-**Important:** Set timeout to 20 minutes (1200000ms) for Codex reviews, as they may take longer than the default timeout due to reasoning-intensive analysis.
+1. Parse $ARGUMENTS for target path (defaults to current directory if empty)
+2. Launch 3 background tasks using the Bash tool with:
+   - `run_in_background: true`
+   - `timeout: 1200000` (20 minutes - Codex reviews may take longer due to reasoning-intensive analysis)
+3. Wait for all tasks to complete using TaskOutput
+4. Summarize findings from all 3 perspectives
+5. Report only actionable issues
 
 ## Output Format
 
@@ -66,3 +51,5 @@ After collecting results, summarize:
 ### Verdict
 [Overall assessment and recommended actions]
 ```
+
+If no issues found in a category, state "No issues found."
