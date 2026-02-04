@@ -1,6 +1,7 @@
 ---
-name: Verification Loop
-description: This skill should be used when the user asks to "verify my code", "run verification", "check before PR", "run build/lint/test checks", or wants a comprehensive quality gate check after completing a feature, before creating a PR, or after refactoring.
+name: verification-loop
+description: Comprehensive verification system for build, type check, lint, test, and security checks before PR creation.
+user-invocable: false
 ---
 
 # Verification Loop Skill

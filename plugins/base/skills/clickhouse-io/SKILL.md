@@ -1,6 +1,7 @@
 ---
-name: ClickHouse IO
-description: This skill should be used when working with ClickHouse databases, writing analytical queries, designing OLAP tables, or optimizing query performance. Use when the user asks about "ClickHouse queries", "MergeTree tables", "analytical workloads", "data pipeline patterns", "materialized views", or "query optimization" for ClickHouse.
+name: clickhouse-io
+description: ClickHouse database patterns, query optimization, analytics, and data engineering best practices for high-performance analytical workloads.
+user-invocable: false
 ---
 
 # ClickHouse Analytics Patterns

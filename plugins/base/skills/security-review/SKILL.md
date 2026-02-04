@@ -1,6 +1,7 @@
 ---
-name: Security Review
-description: This skill should be used when the user asks to "review security", "check for vulnerabilities", "implement authentication", "handle secrets", "validate input", "prevent XSS/CSRF/SQL injection", or when adding authentication, handling user input, working with secrets, creating API endpoints, or implementing payment/sensitive features.
+name: security-review
+description: Use this skill when adding authentication, handling user input, working with secrets, creating API endpoints, or implementing payment/sensitive features. Provides comprehensive security checklist and patterns.
+user-invocable: false
 ---
 
 # Security Review Skill

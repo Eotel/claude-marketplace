@@ -1,3 +1,10 @@
+---
+name: eval
+description: Manage eval-driven development workflow
+user-invocable: true
+disable-model-invocation: true
+---
+
 # Eval Command
 
 Manage eval-driven development workflow.

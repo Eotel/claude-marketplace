@@ -1,5 +1,8 @@
 ---
+name: plan
 description: Restate requirements, assess risks, and create step-by-step implementation plan. WAIT for user CONFIRM before touching any code.
+user-invocable: true
+disable-model-invocation: true
 ---
 
 # Plan Command
@@ -99,10 +102,5 @@ If you want changes, respond with:
 
 After planning:
 - Use `/tdd` to implement with test-driven development
-- Use `/build-and-fix` if build errors occur
+- Use `/build-fix` if build errors occur
 - Use `/code-review` to review completed implementation
-
-## Related Agents
-
-This command invokes the `planner` agent located at:
-`~/.claude/agents/planner.md`

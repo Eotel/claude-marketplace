@@ -1,5 +1,5 @@
 {
   "name": "base",
-  "version": "0.1.0",
-  "description": "Base general plugin with foundational agents, commands, skills, and hooks for software development."
+  "version": "0.2.0",
+  "description": "Base general plugin with foundational agents, skills, and hooks for software development."
 }

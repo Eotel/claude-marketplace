@@ -1,3 +1,11 @@
+---
+name: code-review
+description: Comprehensive security and quality review of uncommitted changes
+user-invocable: true
+disable-model-invocation: true
+context: fork
+---
+
 # Code Review
 
 Comprehensive security and quality review of uncommitted changes:
@@ -9,7 +17,7 @@ Comprehensive security and quality review of uncommitted changes:
 **Security Issues (CRITICAL):**
 - Hardcoded credentials, API keys, tokens
 - SQL injection vulnerabilities
-- XSS vulnerabilities  
+- XSS vulnerabilities
 - Missing input validation
 - Insecure dependencies
 - Path traversal risks

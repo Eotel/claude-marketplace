@@ -1,6 +1,8 @@
 ---
-description: Analyze local git history to extract coding patterns and generate SKILL.md files.
-allowed_tools: ["Bash", "Read", "Write", "Grep", "Glob"]
+name: skill-create
+description: Analyze local git history to extract coding patterns and generate SKILL.md files
+user-invocable: true
+disable-model-invocation: true
 ---
 
 # /skill-create - Local Skill Generation

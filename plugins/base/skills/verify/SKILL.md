@@ -1,3 +1,10 @@
+---
+name: verify
+description: Run comprehensive verification on current codebase state
+user-invocable: true
+disable-model-invocation: true
+---
+
 # Verification Command
 
 Run comprehensive verification on current codebase state.

@@ -1,6 +1,7 @@
 ---
-name: Project Guidelines Example
-description: This skill should be used as a template when creating project-specific skills. Reference this when the user asks to "create a project skill", "set up project guidelines", or needs an example of project-specific architecture, file structure, code patterns, and deployment workflow documentation.
+name: project-guidelines-example
+description: Template for creating project-specific skills with architecture, file structure, code patterns, and deployment workflow documentation.
+user-invocable: false
 ---
 
 # Project Guidelines Skill (Example)

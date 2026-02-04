@@ -1,6 +1,7 @@
 ---
-name: Frontend Patterns
-description: This skill should be used when the user asks about "React patterns", "component composition", "custom hooks", "state management", "performance optimization", "memoization", "lazy loading", "form handling", "accessibility", or needs guidance on modern frontend patterns for React, Next.js, and performant user interfaces.
+name: frontend-patterns
+description: Frontend development patterns for React, Next.js, state management, performance optimization, and UI best practices.
+user-invocable: false
 ---
 
 # Frontend Development Patterns

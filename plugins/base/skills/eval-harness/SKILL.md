@@ -1,6 +1,7 @@
 ---
-name: Eval Harness
-description: This skill should be used when the user asks to "evaluate a feature", "run evals", "define capability evals", "create regression tests", "implement eval-driven development", or needs guidance on pass@k metrics, grader types (code-based, model-based, human), and eval workflow patterns.
+name: eval-harness
+description: Eval-driven development framework with pass@k metrics, capability/regression evals, and grader patterns for systematic feature validation.
+user-invocable: false
 ---
 
 # Eval Harness Skill

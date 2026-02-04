@@ -1,3 +1,11 @@
+---
+name: refactor-clean
+description: Safely identify and remove dead code with test verification
+user-invocable: true
+disable-model-invocation: true
+context: fork
+---
+
 # Refactor Clean
 
 Safely identify and remove dead code with test verification:

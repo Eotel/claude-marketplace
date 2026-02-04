@@ -1,3 +1,10 @@
+---
+name: checkpoint
+description: Create or verify a checkpoint in your workflow
+user-invocable: true
+disable-model-invocation: true
+---
+
 # Checkpoint Command
 
 Create or verify a checkpoint in your workflow.

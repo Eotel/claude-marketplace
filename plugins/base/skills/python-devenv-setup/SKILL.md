@@ -1,6 +1,7 @@
 ---
-name: Python DevEnv Setup
-description: This skill should be used when the user asks to "set up Python development environment", "create devenv for Python", "configure Python project with uv and ruff", "set up basedpyright", or needs a reproducible Nix-based Python development setup with modern tooling.
+name: python-devenv-setup
+description: Reproducible Nix-based Python development environment setup with devenv, uv, ruff, and basedpyright.
+user-invocable: false
 ---
 
 # Python Development Environment Setup

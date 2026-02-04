@@ -1,6 +1,7 @@
 ---
-name: Backend Patterns
-description: This skill should be used when the user asks about "backend architecture", "API design", "REST API patterns", "database queries", "caching strategies", "authentication patterns", "rate limiting", or needs guidance on repository pattern, service layer, middleware, and server-side best practices for Node.js, Express, and Next.js.
+name: backend-patterns
+description: Backend architecture patterns, API design, database optimization, and server-side best practices for Node.js, Express, and Next.js API routes.
+user-invocable: false
 ---
 
 # Backend Development Patterns

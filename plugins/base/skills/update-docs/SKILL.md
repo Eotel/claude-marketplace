@@ -1,3 +1,10 @@
+---
+name: update-docs
+description: Sync documentation from source-of-truth files
+user-invocable: true
+disable-model-invocation: true
+---
+
 # Update Documentation
 
 Sync documentation from source-of-truth:

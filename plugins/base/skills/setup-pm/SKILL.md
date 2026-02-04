@@ -1,5 +1,7 @@
 ---
+name: setup-pm
 description: Configure your preferred package manager (npm/pnpm/yarn/bun)
+user-invocable: true
 disable-model-invocation: true
 ---
 

@@ -1,3 +1,11 @@
+---
+name: orchestrate
+description: Sequential agent workflow for complex tasks
+user-invocable: true
+disable-model-invocation: true
+context: fork
+---
+
 # Orchestrate Command
 
 Sequential agent workflow for complex tasks.
@@ -64,38 +72,6 @@ Between agents, create handoff document:
 [Suggested next steps]
 ```
 
-## Example: Feature Workflow
-
-```
-/orchestrate feature "Add user authentication"
-```
-
-Executes:
-
-1. **Planner Agent**
-   - Analyzes requirements
-   - Creates implementation plan
-   - Identifies dependencies
-   - Output: `HANDOFF: planner -> tdd-guide`
-
-2. **TDD Guide Agent**
-   - Reads planner handoff
-   - Writes tests first
-   - Implements to pass tests
-   - Output: `HANDOFF: tdd-guide -> code-reviewer`
-
-3. **Code Reviewer Agent**
-   - Reviews implementation
-   - Checks for issues
-   - Suggests improvements
-   - Output: `HANDOFF: code-reviewer -> security-reviewer`
-
-4. **Security Reviewer Agent**
-   - Security audit
-   - Vulnerability check
-   - Final approval
-   - Output: Final Report
-
 ## Final Report Format
 
 ```
@@ -133,21 +109,6 @@ RECOMMENDATION
 [SHIP / NEEDS WORK / BLOCKED]
 ```
 
-## Parallel Execution
-
-For independent checks, run agents in parallel:
-
-```markdown
-### Parallel Phase
-Run simultaneously:
-- code-reviewer (quality)
-- security-reviewer (security)
-- architect (design)
-
-### Merge Results
-Combine outputs into single report
-```
-
 ## Arguments
 
 $ARGUMENTS:
@@ -156,12 +117,6 @@ $ARGUMENTS:
 - `refactor <description>` - Refactoring workflow
 - `security <description>` - Security review workflow
 - `custom <agents> <description>` - Custom agent sequence
-
-## Custom Workflow Example
-
-```
-/orchestrate custom "architect,tdd-guide,code-reviewer" "Redesign caching layer"
-```
 
 ## Tips
 

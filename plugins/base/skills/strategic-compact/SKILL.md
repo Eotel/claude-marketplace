@@ -1,6 +1,7 @@
 ---
-name: Strategic Compact
-description: This skill should be used when the user asks about "context management", "when to compact", "strategic compaction", "preserve context", or wants guidance on manual `/compact` at strategic points in workflows rather than relying on arbitrary auto-compaction.
+name: strategic-compact
+description: Suggests manual context compaction at logical intervals to preserve context through task phases rather than arbitrary auto-compaction.
+user-invocable: false
 ---
 
 # Strategic Compact Skill

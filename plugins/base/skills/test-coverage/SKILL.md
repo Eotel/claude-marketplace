@@ -1,3 +1,11 @@
+---
+name: test-coverage
+description: Analyze test coverage and generate missing tests
+user-invocable: true
+disable-model-invocation: true
+context: fork
+---
+
 # Test Coverage
 
 Analyze test coverage and generate missing tests:

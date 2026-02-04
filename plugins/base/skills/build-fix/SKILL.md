@@ -1,3 +1,10 @@
+---
+name: build-fix
+description: Incrementally fix TypeScript and build errors
+user-invocable: true
+disable-model-invocation: true
+---
+
 # Build and Fix
 
 Incrementally fix TypeScript and build errors:
