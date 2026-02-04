@@ -31,8 +31,8 @@
     pkgs.treefmt
   ];
 
-  # Pre-commit hooks
-  pre-commit.hooks = {
+  # Git hooks (pre-commit)
+  git-hooks.hooks = {
     ruff.enable = true;
     ruff-format.enable = true;
     nixfmt-rfc-style.enable = true;

@@ -16,11 +16,20 @@ dev = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
   "pytest>=8.0",
   "pytest-cov>=4.0",
 ]
+
+# Hatch build configuration
+# Update packages path after creating your source directory structure:
+# mkdir -p src/my_project && touch src/my_project/__init__.py
+[tool.hatch.build.targets.wheel]
+packages = ["src/my_project"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src"]
 
 # Ruff configuration
 [tool.ruff]

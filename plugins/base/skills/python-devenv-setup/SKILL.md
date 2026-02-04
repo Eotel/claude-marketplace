@@ -60,7 +60,7 @@ Configure Python version, packages, pre-commit hooks, and shell initialization.
 Key sections:
 - `languages.python` - Python version and uv configuration
 - `packages` - Development tools (ruff, basedpyright, treefmt)
-- `pre-commit.hooks` - Automated linting on commit
+- `git-hooks.hooks` - Automated linting on commit
 - `enterShell` - Welcome message with available commands
 
 For database support, add packages and environment variables. See `references/database-variants.md`.
@@ -107,6 +107,10 @@ Add exclusions for development artifacts, virtual environments, and tool caches.
 After generating files:
 
 ```bash
+# Create source directory structure (required for hatchling)
+mkdir -p src/my_project
+touch src/my_project/__init__.py
+
 # Enter the environment (auto-creates lock file)
 direnv allow
 
