@@ -1,5 +1,6 @@
 ---
-description: Universal coding standards, best practices, and patterns for TypeScript, JavaScript, React, and Node.js development.
+name: Coding Standards
+description: This skill should be used when the user asks about "coding standards", "best practices", "code style", "TypeScript patterns", "JavaScript conventions", "naming conventions", "error handling patterns", or needs guidance on KISS, DRY, YAGNI principles and code quality.
 ---
 
 # Coding Standards & Best Practices

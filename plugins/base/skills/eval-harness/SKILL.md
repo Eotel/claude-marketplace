@@ -1,3 +1,8 @@
+---
+name: Eval Harness
+description: This skill should be used when the user asks to "evaluate a feature", "run evals", "define capability evals", "create regression tests", "implement eval-driven development", or needs guidance on pass@k metrics, grader types (code-based, model-based, human), and eval workflow patterns.
+---
+
 # Eval Harness Skill
 
 A formal evaluation framework for Claude Code sessions, implementing eval-driven development (EDD) principles.

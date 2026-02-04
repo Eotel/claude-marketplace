@@ -1,3 +1,8 @@
+---
+name: Verification Loop
+description: This skill should be used when the user asks to "verify my code", "run verification", "check before PR", "run build/lint/test checks", or wants a comprehensive quality gate check after completing a feature, before creating a PR, or after refactoring.
+---
+
 # Verification Loop Skill
 
 A comprehensive verification system for Claude Code sessions.

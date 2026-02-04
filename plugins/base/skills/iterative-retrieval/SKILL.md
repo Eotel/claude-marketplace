@@ -1,5 +1,6 @@
 ---
-description: Pattern for progressively refining context retrieval to solve the subagent context problem
+name: Iterative Retrieval
+description: This skill should be used when building multi-agent workflows, designing subagent context retrieval, or implementing progressive context refinement. Use when the user asks about "subagent context problem", "iterative retrieval pattern", "context problem", or needs to "refine context progressively" for autonomous agents.
 ---
 
 # Iterative Retrieval Pattern
