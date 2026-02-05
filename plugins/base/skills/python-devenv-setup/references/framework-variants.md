@@ -14,13 +14,13 @@ dependencies = [
   "django-filter>=24.0",
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
   "pytest>=8.0",
   "pytest-django>=4.8",
   "pytest-cov>=4.0",
-  "mypy>=1.10",
-  "django-stubs>=5.0",
+  "ruff>=0.11",
+  "ty>=0.0.1",
 ]
 ```
 
@@ -41,26 +41,19 @@ section-order = [
 django = ["django", "rest_framework", "django_filters"]
 ```
 
-### MyPy Configuration
+### ty Configuration
 
 ```toml
-[tool.mypy]
-python_version = "3.12"
-plugins = ["mypy_django_plugin.main"]
-strict = false
-warn_return_any = true
-warn_unused_configs = true
-exclude = [
-  "migrations/",
-  "tests/",
-]
+[tool.ty.environment]
+python-version = "3.12"
 
-[tool.django-stubs]
-django_settings_module = "config.settings"
+[tool.ty.src]
+include = ["src", "tests"]
 
-[[tool.mypy.overrides]]
-module = "*.migrations.*"
-ignore_errors = true
+[tool.ty.rules]
+# Django uses dynamic model attributes; relax unresolved references
+possibly-unresolved-reference = "warn"
+possibly-missing-attribute = "warn"
 ```
 
 ### Pytest Configuration
@@ -70,32 +63,6 @@ ignore_errors = true
 DJANGO_SETTINGS_MODULE = "config.settings"
 testpaths = ["tests"]
 python_files = ["test_*.py"]
-```
-
-### pyrightconfig.json for Django
-
-```json
-{
-  "include": ["src", "tests", "config"],
-  "exclude": [
-    "**/node_modules",
-    "**/__pycache__",
-    "**/migrations",
-    ".venv",
-    "venv"
-  ],
-  "pythonVersion": "3.12",
-  "pythonPlatform": "All",
-  "venvPath": ".",
-  "venv": ".venv",
-  "typeCheckingMode": "standard",
-  "reportUnusedImport": "warning",
-  "reportUnusedVariable": "warning",
-  "reportUnknownMemberType": false,
-  "reportUnknownArgumentType": false,
-  "reportUnknownVariableType": false,
-  "reportAny": false
-}
 ```
 
 ## FastAPI
@@ -111,13 +78,14 @@ dependencies = [
   "pydantic-settings>=2.0",
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
   "pytest>=8.0",
   "pytest-asyncio>=0.23",
   "pytest-cov>=4.0",
   "httpx>=0.27",
-  "mypy>=1.10",
+  "ruff>=0.11",
+  "ty>=0.0.1",
 ]
 ```
 
@@ -138,23 +106,17 @@ section-order = [
 fastapi = ["fastapi", "pydantic", "starlette"]
 ```
 
-### MyPy Configuration
+### ty Configuration
 
 ```toml
-[tool.mypy]
-python_version = "3.12"
-plugins = ["pydantic.mypy"]
-strict = false
-warn_return_any = true
-warn_unused_configs = true
-exclude = [
-  "tests/",
-]
+[tool.ty.environment]
+python-version = "3.12"
 
-[tool.pydantic-mypy]
-init_forbid_extra = true
-init_typed = true
-warn_required_dynamic_aliases = true
+[tool.ty.src]
+include = ["src", "tests"]
+
+[tool.ty.rules]
+possibly-unresolved-reference = "warn"
 ```
 
 ### Pytest Configuration
@@ -178,12 +140,13 @@ dependencies = [
   "flask-migrate>=4.0",
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
   "pytest>=8.0",
   "pytest-flask>=1.3",
   "pytest-cov>=4.0",
-  "mypy>=1.10",
+  "ruff>=0.11",
+  "ty>=0.0.1",
 ]
 ```
 
@@ -204,18 +167,17 @@ section-order = [
 flask = ["flask", "flask_sqlalchemy", "flask_migrate"]
 ```
 
-### MyPy Configuration
+### ty Configuration
 
 ```toml
-[tool.mypy]
-python_version = "3.12"
-strict = false
-warn_return_any = true
-warn_unused_configs = true
-exclude = [
-  "migrations/",
-  "tests/",
-]
+[tool.ty.environment]
+python-version = "3.12"
+
+[tool.ty.src]
+include = ["src", "tests"]
+
+[tool.ty.rules]
+possibly-unresolved-reference = "warn"
 ```
 
 ## No Framework (Library/CLI)
@@ -226,11 +188,12 @@ exclude = [
 [project]
 dependencies = []
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
   "pytest>=8.0",
   "pytest-cov>=4.0",
-  "mypy>=1.10",
+  "ruff>=0.11",
+  "ty>=0.0.1",
 ]
 ```
 
@@ -249,48 +212,36 @@ section-order = [
 ]
 ```
 
-### MyPy Configuration
+### ty Configuration
 
 ```toml
-[tool.mypy]
-python_version = "3.12"
-strict = false
-warn_return_any = true
-warn_unused_configs = true
-exclude = [
-  "tests/",
-]
+[tool.ty.environment]
+python-version = "3.12"
+
+[tool.ty.src]
+include = ["src", "tests"]
 ```
 
 ## Type Checking Strictness Levels
 
 ### Standard (Default)
 
-```json
-{
-  "typeCheckingMode": "standard",
-  "reportUnknownMemberType": false,
-  "reportUnknownArgumentType": false,
-  "reportUnknownVariableType": false,
-  "reportAny": false
-}
-```
+Uses ty's default rule severities. No additional configuration needed beyond the base `[tool.ty]` section.
 
-### Strict (--strict-types)
+### Strict (`--strict-types`)
 
-```json
-{
-  "typeCheckingMode": "strict",
-  "reportUnknownMemberType": "warning",
-  "reportUnknownArgumentType": "warning",
-  "reportUnknownVariableType": "warning",
-  "reportAny": "warning"
-}
-```
-
-And in pyproject.toml:
+Elevate key rules to `"error"` severity for stricter type enforcement:
 
 ```toml
-[tool.mypy]
-strict = true
+[tool.ty.rules]
+possibly-unresolved-reference = "error"
+possibly-missing-attribute = "error"
+invalid-assignment = "error"
+invalid-return-type = "error"
+invalid-argument-type = "error"
+call-non-callable = "error"
+invalid-type-arguments = "error"
+invalid-method-override = "error"
+deprecated = "warn"
+redundant-cast = "warn"
 ```

@@ -18,8 +18,7 @@ devenv.local.yaml
 .direnv/
 
 # Type checking
-.mypy_cache/
-.pyright/
+.ty_cache/
 
 # Testing
 .pytest_cache/

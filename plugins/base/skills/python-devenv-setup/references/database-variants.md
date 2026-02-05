@@ -131,15 +131,11 @@ dependencies = [
   languages.python = {
     enable = true;
     version = "3.12";
-    uv = {
-      enable = true;
-      sync.enable = true;
-    };
+    uv.enable = true;
   };
 
   packages = [
     pkgs.ruff
-    pkgs.basedpyright
     pkgs.nixfmt-rfc-style
     pkgs.treefmt
     # MySQL support
@@ -154,7 +150,7 @@ dependencies = [
     MYSQLCLIENT_LDFLAGS = "-L${pkgs.libmysqlclient}/lib/mariadb -lmariadb";
   };
 
-  pre-commit.hooks = {
+  git-hooks.hooks = {
     ruff.enable = true;
     ruff-format.enable = true;
     nixfmt-rfc-style.enable = true;
@@ -181,15 +177,11 @@ dependencies = [
   languages.python = {
     enable = true;
     version = "3.12";
-    uv = {
-      enable = true;
-      sync.enable = true;
-    };
+    uv.enable = true;
   };
 
   packages = [
     pkgs.ruff
-    pkgs.basedpyright
     pkgs.nixfmt-rfc-style
     pkgs.treefmt
     # PostgreSQL support
@@ -201,7 +193,7 @@ dependencies = [
     LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.libpq ];
   };
 
-  pre-commit.hooks = {
+  git-hooks.hooks = {
     ruff.enable = true;
     ruff-format.enable = true;
     nixfmt-rfc-style.enable = true;
