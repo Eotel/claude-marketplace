@@ -5,13 +5,6 @@ version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = []
 
-[project.optional-dependencies]
-dev = [
-  "pytest>=8.0",
-  "pytest-cov>=4.0",
-  "mypy>=1.10",
-]
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -20,6 +13,8 @@ build-backend = "hatchling.build"
 dev = [
   "pytest>=8.0",
   "pytest-cov>=4.0",
+  "ruff>=0.11",
+  "ty>=0.0",
 ]
 
 # Hatch build configuration
@@ -62,17 +57,6 @@ section-order = [
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
-
-# MyPy configuration
-[tool.mypy]
-python_version = "3.12"
-strict = false
-warn_return_any = true
-warn_unused_configs = true
-exclude = [
-  "migrations/",
-  "tests/",
-]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

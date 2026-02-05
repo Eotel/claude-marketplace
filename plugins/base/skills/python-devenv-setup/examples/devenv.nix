@@ -12,26 +12,17 @@
   languages.python = {
     enable = true;
     version = "3.12";
-    uv = {
-      enable = true;
-      sync.enable = true;
-    };
+    uv.enable = true;
   };
 
   # Development packages
   packages = [
-    # Linting & Formatting
     pkgs.ruff
-
-    # Type checking
-    pkgs.basedpyright
-
-    # Formatting
     pkgs.nixfmt-rfc-style
     pkgs.treefmt
   ];
 
-  # Git hooks (pre-commit)
+  # Git hooks
   git-hooks.hooks = {
     ruff.enable = true;
     ruff-format.enable = true;
@@ -46,16 +37,12 @@
     echo "Python: $(python --version)"
     echo "uv: $(uv --version)"
     echo ""
-    echo "Tools:"
-    echo "  ruff: $(ruff --version)"
-    echo "  basedpyright: $(basedpyright --version)"
-    echo ""
     echo "Commands:"
     echo "  uv sync          - Install dependencies"
     echo "  uv add <pkg>     - Add dependency"
     echo "  ruff check .     - Run linter"
     echo "  ruff format .    - Format code"
-    echo "  basedpyright     - Type check"
+    echo "  uv run ty check  - Type check"
     echo "  treefmt          - Format all files"
     echo ""
   '';
