@@ -3,6 +3,7 @@ name: refactor-cleaner
 description: Dead code cleanup and consolidation specialist. Use PROACTIVELY for removing unused code, duplicates, and refactoring. Runs analysis tools (knip, depcheck, ts-prune) to identify dead code and safely removes it.
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: opus
+memory: project
 ---
 
 # Refactor & Dead Code Cleaner
@@ -325,3 +326,14 @@ After cleanup session:
 
 **Remember
 **: Dead code is technical debt. Regular cleanup keeps the codebase maintainable and fast. But safety first - never remove code without understanding why it exists.
+
+## Agent Memory
+
+**Update your agent memory** as you discover false positives, code that must be preserved, and safe deletion patterns. This prevents re-mistakes and speeds up future cleanup sessions.
+
+Write concise notes about:
+- Code that appears unused but is actually needed (false positives from detection tools)
+- "Do not remove" rules and the reasons behind them
+- Dynamic import patterns that detection tools miss
+- Safe deletion patterns established for this project
+- Historical context on why certain code exists

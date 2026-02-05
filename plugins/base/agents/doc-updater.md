@@ -3,6 +3,7 @@ name: doc-updater
 description: Documentation and codemap specialist. Use PROACTIVELY for updating codemaps and documentation. Runs /update-codemaps and /update-docs, generates docs/CODEMAPS/*, updates READMEs and guides.
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: opus
+memory: project
 ---
 
 # Documentation & Codemap Specialist
@@ -421,3 +422,14 @@ Before committing documentation:
 
 **Remember
 **: Documentation that doesn't match reality is worse than no documentation. Always generate from source of truth (the actual code).
+
+## Agent Memory
+
+**Update your agent memory** as you discover codebase structure, module purposes, and documentation conventions. This builds up a map of the project that improves documentation quality over time.
+
+Write concise notes about:
+- High-level architecture and module organization
+- Key entry points and data flows
+- Documentation conventions for this project
+- External dependencies and their purposes
+- Areas of the codebase that change frequently
