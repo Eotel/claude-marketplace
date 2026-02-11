@@ -24,16 +24,97 @@ Set up a complete, reproducible Python development environment using devenv, uv,
 - direnv installed and hooked into shell
 - devenv CLI installed
 
-## Command Options
+## Implementation Workflow
 
-| Option | Values | Default | Description |
-|--------|--------|---------|-------------|
-| `--python` | 3.10, 3.11, 3.12, 3.13 | 3.12 | Python version |
-| `--db` | mysql, postgres, sqlite | sqlite | Database support |
-| `--framework` | django, fastapi, flask, none | none | Web framework |
-| `--strict-types` | flag | false | Enable strict type checking |
+Before running the setup script, gather parameters from the user using `AskUserQuestion`.
 
-## Generated Files Overview
+### Step 1: Infer defaults
+
+- **PROJECT_NAME**: Infer from the current directory name or git remote (e.g. `basename $(pwd)`)
+- **PYTHON_VERSION**: Default to `3.12`
+- **DEPS / DEV_DEPS**: Infer from conversation context if the user mentioned specific libraries
+
+### Step 2: Ask the user to confirm
+
+Use `AskUserQuestion` to confirm or adjust parameters. Ask all questions in a single call.
+
+Example:
+
+```
+AskUserQuestion({
+  questions: [
+    {
+      question: "What is the project name?",
+      header: "Project",
+      options: [
+        { label: "<inferred-name>", description: "Inferred from current directory" },
+        { label: "custom", description: "Enter a different name" }
+      ],
+      multiSelect: false
+    },
+    {
+      question: "Which Python version?",
+      header: "Python",
+      options: [
+        { label: "3.12 (Recommended)", description: "Latest stable, widest ecosystem support" },
+        { label: "3.13", description: "Newest release" },
+        { label: "3.11", description: "Previous stable" }
+      ],
+      multiSelect: false
+    },
+    {
+      question: "Do you need database or web framework support?",
+      header: "Extras",
+      options: [
+        { label: "None", description: "Base setup only" },
+        { label: "FastAPI", description: "Async web framework" },
+        { label: "Django", description: "Full-stack web framework" },
+        { label: "Flask", description: "Lightweight web framework" }
+      ],
+      multiSelect: false
+    }
+  ]
+})
+```
+
+Adapt the options based on context — skip questions where the answer is already clear from the conversation.
+
+### Step 3: Run `setup.sh`
+
+Build the command from the user's answers and execute.
+
+### Step 4: Apply customizations
+
+If the user selected a database or framework, read the corresponding `references/*.md` file and apply the additional edits to `devenv.nix` and `pyproject.toml`.
+
+## Setup Script
+
+`setup.sh` generates all configuration files and directory structure in one step.
+
+### Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `PROJECT_NAME` | Project name in kebab-case (e.g. `simple-a2a-agent`) | **Required** |
+| `PYTHON_VERSION` | Python version (e.g. `3.12`) | `3.12` |
+| `DEPS` | Production dependencies, space-separated | (empty) |
+| `DEV_DEPS` | Development dependencies, space-separated | (empty) |
+| `TARGET_DIR` | Output directory | Current directory |
+
+### Usage
+
+```bash
+# Basic setup
+PROJECT_NAME="my-project" PYTHON_VERSION="3.12" \
+  bash "${CLAUDE_PLUGIN_ROOT}/skills/python-devenv-setup/setup.sh"
+
+# With dependencies
+PROJECT_NAME="my-api" PYTHON_VERSION="3.12" \
+  DEPS="fastapi uvicorn" DEV_DEPS="pytest-asyncio httpx" \
+  bash "${CLAUDE_PLUGIN_ROOT}/skills/python-devenv-setup/setup.sh"
+```
+
+### Generated Files
 
 | File | Purpose |
 |------|---------|
@@ -43,75 +124,34 @@ Set up a complete, reproducible Python development environment using devenv, uv,
 | `pyproject.toml` | Project config with hatch, ruff, pytest settings |
 | `treefmt.toml` | Multi-language formatter config |
 | `.gitignore` | Development artifact exclusions |
+| `src/<package>/` | Source package directory with `__init__.py` |
+| `tests/` | Test directory with `__init__.py` |
 
-## Implementation Steps
+## Post-Setup
 
-### 1. Create devenv.yaml
-
-Define Nix inputs and cachix caches. See `examples/devenv.yaml` for complete template.
-
-### 2. Create devenv.nix
-
-Configure Python version, packages, git hooks, and shell initialization.
-
-Key sections:
-- `languages.python` - Python version and uv configuration
-- `packages` - Nix tools (ruff, treefmt, nixfmt)
-- `git-hooks.hooks` - Automated linting on commit
-- `enterShell` - Welcome message with available commands
-
-For database support, add packages and environment variables. See `references/database-variants.md`.
-
-### 3. Create .envrc
+After running the script:
 
 ```bash
-#!/usr/bin/env bash
-export DIRENV_WARN_TIMEOUT=20s
-eval "$(devenv direnvrc)"
-use devenv
-```
-
-### 4. Create pyproject.toml
-
-Configure project metadata, dependencies, and tool settings:
-- `[project]` - Name, version, Python requirement
-- `[build-system]` - Hatchling build backend
-- `[dependency-groups]` - Dev dependencies (pytest, ruff, ty)
-- `[tool.ruff]` - Linting rules and formatting
-- `[tool.pytest]` - Test configuration
-
-For framework-specific settings, see `references/framework-variants.md`.
-
-### 5. Create treefmt.toml
-
-Configure formatters for Python (ruff) and Nix (nixfmt).
-
-### 6. Update .gitignore
-
-Add exclusions for development artifacts, virtual environments, and tool caches.
-
-## Setup Commands
-
-After generating files:
-
-```bash
-# Create source directory structure (required for hatchling build)
-mkdir -p src/my_project && touch src/my_project/__init__.py
-mkdir -p tests && touch tests/__init__.py
-
-# Enter the environment (auto-creates lock file)
+# Activate the environment
 direnv allow
 
-# Install Python dependencies (manual step - uv sync is not auto-run)
+# Install Python dependencies
 uv sync
 
-# Verify setup
+# Verify
 python --version
 ruff --version
 uv run ty --version
 ```
 
-**Note:** `uv.sync.enable` is intentionally disabled in the devenv.nix template to avoid bootstrap failures when `src/my_project/` doesn't exist yet on first setup.
+**Note:** `uv.sync.enable` is intentionally disabled in the devenv.nix template to avoid bootstrap failures when `src/<package>/` doesn't exist yet on first setup.
+
+## DB / Framework Customization
+
+The setup script generates a base configuration. For database or web framework support, edit `devenv.nix` and `pyproject.toml` after running the script:
+
+- **Database support** (MySQL, PostgreSQL, SQLite) — see `references/database-variants.md`
+- **Framework settings** (Django, FastAPI, Flask) — see `references/framework-variants.md`
 
 ## Verification
 
@@ -158,20 +198,3 @@ uv sync
 ### Database compilation errors
 
 See `references/database-variants.md` for required environment variables.
-
-## Additional Resources
-
-### Reference Files
-
-- **`references/database-variants.md`** - MySQL and PostgreSQL configuration details
-- **`references/framework-variants.md`** - Django and FastAPI specific settings
-
-### Example Files
-
-Complete, working configuration templates in `examples/`:
-
-- `devenv.yaml` - Nix inputs configuration
-- `devenv.nix` - Base development environment
-- `pyproject.toml` - Project and tool configuration
-- `treefmt.toml` - Formatter configuration
-- `gitignore` - Git exclusions
