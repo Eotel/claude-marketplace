@@ -1,9 +1,14 @@
 {
-  "hooks": [
-    {
-      "event": "SessionStart",
-      "type": "prompt",
-      "prompt": "Codex CLI is available for external code review. After implementing code, use `/codex-toolkit:codex-review` to get parallel reviews from a different LLM (bugs, security, edge-cases perspectives)."
-    }
-  ]
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Codex CLI is available for external code review. After implementing code, use `/codex-toolkit:codex-review` to get parallel reviews from a different LLM (bugs, security, edge-cases perspectives)."
+          }
+        ]
+      }
+    ]
+  }
 }
