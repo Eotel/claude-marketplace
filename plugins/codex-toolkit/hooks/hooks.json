@@ -4,8 +4,8 @@
       {
         "hooks": [
           {
-            "type": "prompt",
-            "prompt": "Codex CLI is available for external code review. After implementing code, use `/codex-toolkit:codex-review` to get parallel reviews from a different LLM (bugs, security, edge-cases perspectives)."
+            "type": "command",
+            "command": "echo '[codex-toolkit] Codex CLI is available for external code review. Use /codex-toolkit:codex-review after implementing code.' >&2"
           }
         ]
       }
