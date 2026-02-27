@@ -1,36 +1,45 @@
 ---
 description: Run parallel code reviews using Codex CLI as an external reviewer
-argument-hint: [target-path]
+argument-hint: [--uncommitted|--base <branch>|--commit <sha>]
 allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/review.sh*)
 ---
 
 # Codex Review
 
-You are Claude Code. Use Codex CLI to get an external LLM review of code.
+You are Claude Code. Use Codex CLI to get an external LLM review of code changes.
 
 ## Instructions
 
-Run 3 parallel background reviews using the review script with different perspectives.
+### Mode 1: Default (no flags) — 3 parallel perspective reviews
 
-**IMPORTANT:** Always use the full script path with `${CLAUDE_PLUGIN_ROOT}`:
+When $ARGUMENTS is empty or not a flag, run 3 parallel background reviews:
 
 ```bash
-${CLAUDE_PLUGIN_ROOT}/scripts/review.sh bugs $TARGET
-${CLAUDE_PLUGIN_ROOT}/scripts/review.sh security $TARGET
-${CLAUDE_PLUGIN_ROOT}/scripts/review.sh edge-cases $TARGET
+${CLAUDE_PLUGIN_ROOT}/scripts/review.sh bugs
+${CLAUDE_PLUGIN_ROOT}/scripts/review.sh security
+${CLAUDE_PLUGIN_ROOT}/scripts/review.sh edge-cases
 ```
 
-Where `$TARGET` is a file or directory path from the user's arguments (defaults to `.` if not specified).
+### Mode 2: With flag — single comprehensive review
+
+When $ARGUMENTS contains `--uncommitted`, `--base <branch>`, or `--commit <sha>`, run a single review:
+
+```bash
+${CLAUDE_PLUGIN_ROOT}/scripts/review.sh $ARGUMENTS
+```
+
+This delegates directly to `codex review <flag>` for a built-in comprehensive review.
 
 ## Workflow
 
-1. Parse $ARGUMENTS for target path (defaults to current directory if empty)
-2. Launch 3 background tasks using the Bash tool with:
+1. Parse $ARGUMENTS to determine the mode
+2. **Mode 1 (default):** Launch 3 background tasks using the Bash tool with:
    - `run_in_background: true`
-   - `timeout: 1200000` (20 minutes - Codex reviews may take longer due to reasoning-intensive analysis)
-3. Wait for all tasks to complete using TaskOutput
-4. Summarize findings from all 3 perspectives
-5. Report only actionable issues
+   - `timeout: 1200000` (20 minutes)
+3. **Mode 2 (with flag):** Launch 1 background task with the same settings
+4. Wait for all tasks to complete using TaskOutput
+5. Summarize findings
+6. Report only actionable issues
 
 ## Output Format
 
@@ -53,3 +62,4 @@ After collecting results, summarize:
 ```
 
 If no issues found in a category, state "No issues found."
+For Mode 2 (single comprehensive review), adapt the format to match the output structure.

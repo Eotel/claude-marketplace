@@ -8,16 +8,16 @@ Use a different LLM (Codex/OpenAI) to review code that Claude implemented. This 
 
 - Independent perspective from a different model
 - Parallel review across multiple concerns (bugs, security, edge-cases)
-- High-quality analysis with Codex's reasoning capabilities
+- Git diff-based analysis with `codex review` for focused reviews
 
 ## Workflow
 
 ```
-Claude (implementer) → writes code
-        ↓
-Codex CLI (reviewer) → reviews Claude's implementation
-        ↓
-Claude → summarizes findings and applies fixes
+Claude (implementer) -> writes code
+        |
+Codex CLI (reviewer) -> reviews git diff via `codex review`
+        |
+Claude -> summarizes findings and applies fixes
 ```
 
 ## Requirements
@@ -36,7 +36,7 @@ cp -r plugins/codex-toolkit ~/.claude/plugins/
 
 ## Command
 
-### `/codex-toolkit:codex-review [target]`
+### `/codex-toolkit:codex-review [--uncommitted|--base <branch>|--commit <sha>]`
 
 Run parallel code reviews using 3 perspectives:
 
@@ -49,9 +49,10 @@ Run parallel code reviews using 3 perspectives:
 **Usage:**
 
 ```bash
-/codex-toolkit:codex-review              # Review current directory
-/codex-toolkit:codex-review src/auth.ts  # Review specific file
-/codex-toolkit:codex-review ./src        # Review directory
+/codex-toolkit:codex-review                    # Review uncommitted changes (default)
+/codex-toolkit:codex-review --uncommitted      # Explicitly review uncommitted changes
+/codex-toolkit:codex-review --base main        # Review changes against main branch
+/codex-toolkit:codex-review --commit abc123    # Review a specific commit
 ```
 
 **Note:** Reviews run as background tasks with 20-minute timeout since Codex analysis may take longer due to reasoning.
@@ -60,13 +61,14 @@ Run parallel code reviews using 3 perspectives:
 
 ### `scripts/review.sh`
 
-Wrapper for `codex exec` with predefined review prompts. Codex reads files directly via `--sandbox read-only` mode.
+Wrapper for `codex review` with predefined review prompts. Uses git diff-based analysis.
 
 ```bash
 # Manual usage (plugin uses ${CLAUDE_PLUGIN_ROOT}/scripts/review.sh)
-./scripts/review.sh bugs src/main.ts
-./scripts/review.sh security ./src
-./scripts/review.sh edge-cases .
+./scripts/review.sh bugs
+./scripts/review.sh security --uncommitted
+./scripts/review.sh edge-cases --base main
+./scripts/review.sh bugs --commit abc123
 ```
 
 ## Session Hook
