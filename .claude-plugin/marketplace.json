@@ -20,13 +20,15 @@
       "keywords": ["codex", "workflow", "cli"]
     },
     {
-      "name": "base",
-      "description": "Base general plugin.",
-      "source": "./plugins/base",
-      "version": "0.2.0",
+      "name": "nix-skills",
+      "description": "Nix packaging skills: Python devenv setup with devenv/uv/ruff/ty, and Node.js-to-Nix derivation patterns",
+      "source": "./plugins/nix-skills",
+      "version": "1.0.0",
       "author": {
-        "name": "Eotel"
-      }
+        "name": "Eotel",
+        "url": "https://github.com/Eotel"
+      },
+      "keywords": ["nix", "devenv", "python", "nodejs", "packaging"]
     }
   ]
 }
