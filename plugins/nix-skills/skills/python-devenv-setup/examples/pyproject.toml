@@ -1,0 +1,70 @@
+# pyproject.toml - Base Python project configuration
+[project]
+name = "my-project"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=4.0",
+  "ruff>=0.11",
+  "ty>=0.0.1",
+]
+
+# Hatch build configuration
+# Update packages path after creating your source directory structure:
+# mkdir -p src/my_project && touch src/my_project/__init__.py
+[tool.hatch.build.targets.wheel]
+packages = ["src/my_project"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src"]
+
+# Ruff configuration
+[tool.ruff]
+line-length = 119
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+  "E4", "E7", "E9",  # Errors
+  "F",               # PyFlakes
+  "B",               # Bugbear
+  "W",               # Warnings
+  "I",               # isort
+  "C4",              # Comprehensions
+  "UP",              # Pyupgrade
+]
+ignore = [
+  "E501",  # Line length (handled by formatter)
+]
+
+[tool.ruff.lint.isort]
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "first-party",
+  "local-folder",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# ty configuration
+[tool.ty.environment]
+python-version = "3.12"
+
+[tool.ty.src]
+include = ["src", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

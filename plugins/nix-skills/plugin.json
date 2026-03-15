@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin.json",
+  "name": "nix-skills",
+  "description": "Nix packaging skills: Python devenv setup with devenv/uv/ruff/ty, and Node.js-to-Nix derivation patterns",
+  "version": "1.0.0"
+}

@@ -1,0 +1,16 @@
+# devenv.yaml - Nix flake inputs configuration
+inputs:
+  nixpkgs:
+    url: github:cachix/devenv-nixpkgs/rolling
+  nixpkgs-python:
+    url: github:cachix/nixpkgs-python
+    inputs:
+      nixpkgs:
+        follows: nixpkgs
+
+cachix:
+  enable: true
+  caches:
+    - nixpkgs-python
+    - devenv
+    - nix-community
