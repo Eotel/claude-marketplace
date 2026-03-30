@@ -1,0 +1,12 @@
+# devenv.yaml - Nix flake inputs configuration
+# NOTE: After copying, run:
+#   devenv inputs add rust-overlay github:oxalica/rust-overlay --follows nixpkgs
+inputs:
+  nixpkgs:
+    url: github:cachix/devenv-nixpkgs/rolling
+
+cachix:
+  enable: true
+  caches:
+    - devenv
+    - nix-community
