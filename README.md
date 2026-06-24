@@ -13,9 +13,9 @@ claude plugin marketplace add Eotel/claude-marketplace
 2. Install plugin from the marketplace
 
 ```
-claude plugin install codex-toolkit@eotel-marketplace
+claude plugin install nix-skills@eotel-marketplace
 ```
 
 ## Plugins
 
-- codex-toolkit: Commands and skills for a safe Codex CLI workflow.
+- nix-skills: Nix packaging skills: Python devenv setup with devenv/uv/ruff/ty, and Node.js-to-Nix derivation patterns.
