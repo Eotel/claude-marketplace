@@ -47,8 +47,8 @@ cp "${TEMPLATE_DIR}/envrc"       "${TARGET_DIR}/.envrc"
 cp "${TEMPLATE_DIR}/treefmt.toml" "${TARGET_DIR}/treefmt.toml"
 cp "${TEMPLATE_DIR}/gitignore"   "${TARGET_DIR}/.gitignore"
 
-# devenv.nix — substitute Python version
-sed "s/version = \"3.12\"/version = \"${PYTHON_VERSION}\"/" \
+# devenv.nix — substitute Python version (nixpkgs attribute, e.g. pkgs.python313)
+sed "s/pkgs\.python312;/pkgs.python${PYTHON_VERSION//./};/" \
   "${TEMPLATE_DIR}/devenv.nix" > "${TARGET_DIR}/devenv.nix"
 
 # pyproject.toml — substitute project name, package name, Python version

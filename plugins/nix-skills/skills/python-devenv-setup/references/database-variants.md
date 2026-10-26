@@ -130,7 +130,7 @@ dependencies = [
 {
   languages.python = {
     enable = true;
-    version = "3.12";
+    package = pkgs.python312;
     uv.enable = true;
   };
 
@@ -176,7 +176,7 @@ dependencies = [
 {
   languages.python = {
     enable = true;
-    version = "3.12";
+    package = pkgs.python312;
     uv.enable = true;
   };
 
