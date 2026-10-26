@@ -12,7 +12,7 @@
       "name": "nix-skills",
       "description": "Nix packaging skills: Python devenv setup with devenv/uv/ruff/ty, and Node.js-to-Nix derivation patterns",
       "source": "./plugins/nix-skills",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "Eotel",
         "url": "https://github.com/Eotel"
